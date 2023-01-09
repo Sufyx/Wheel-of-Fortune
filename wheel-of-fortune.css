@@ -1,0 +1,503 @@
+/**
+ * Panda Casino
+ * Asaf Gilboa.
+*/
+
+body,html,h1,h2,h3,h4,h5,h6,div,ul,.row, .myRow, #mainCont, #boardCont,
+ #bottomCont, #wheelCont, span, #play, .cell {
+    margin: 0;
+    padding: 0;
+}
+body, html, #mainCont {
+    height: 99.5%;
+    width: 100%;
+    overflow: hidden;
+}
+body {
+    background: url("images/main-bg2.jpg");
+    background-size: cover;
+}
+#mainCont {
+    position: relative;
+}
+
+
+/****************** WHEEL ******************/
+
+#wheelCont {
+    text-align: center;
+    display: none;
+    position: fixed;
+    left: 29%;
+    top: 5%;
+    z-index: 3;
+}
+#wheelImg {
+    width: 80%;
+    aspect-ratio: 1 / 1;
+    transition: 2s ease-out;
+}
+#arwImg {
+    position: absolute;
+    top: -3%;
+    left: 46%;
+    width: 8%;
+    z-index: 4;
+}
+
+#spinBtn {
+    position: absolute;
+    top: 38%;
+    left: 40%;
+    width: 20%;
+    aspect-ratio: 1 / 1;
+    display: inline-block;
+    border-radius: 50%;
+    z-index: 4;
+    background: url("images/spinBtn.png");
+    background-size: contain;
+    text-align: center;
+    font-size: 2.5vw;
+    font-weight: 550;
+    color: black;
+    box-shadow: 0 0 16px 8px gold;
+    text-shadow: 0 0 5px red;
+    font-family: 'Shojumaru', cursive;
+}
+#spinBtn:hover {
+    box-shadow: 0 0 16px 8px red;
+    text-shadow: 0 0 5px gold;
+}
+
+
+#boardCont {
+    display: inline-block;
+    height:70%;
+    width: 80%;
+    margin-left: 2%;
+    margin-top: 0.5%;
+    transition: 0.8s;
+}
+
+.myRow {
+    height: 17%;
+} 
+
+.cell {
+    width: 8%;
+    height: 100%;
+    background: url("images/backtile2.png");
+    background-size: cover;
+    text-align: center;
+    vertical-align: middle;
+    transform: rotateY(180deg);
+    border-radius: 6%;
+}
+
+.letter {
+    display: inline-block;
+    line-height: 110%;
+    color: transparent;
+    background: inherit;
+    font-size: 5.5vw;
+    backface-visibility: hidden;
+    font-family: 'Cherry Swash', cursive;
+}
+
+#infoBox {
+    position: absolute;
+    display: inline-block;
+    width: 20%;
+    z-index: 4;
+    top: 1%;
+    right: 1%;
+    border-radius: 6%;
+    background-size: cover;
+}
+
+.infoLine {    
+    font-size: 1.5vw;
+    padding: 1%;
+    color: floralwhite;
+    text-shadow: 0 0 8px cornflowerblue;
+    border-bottom: 1px inset oldlace;
+    border-top: 1px inset oldlace;
+    font-family: 'Black Ops One', cursive;
+}
+
+#message {
+    color: black;
+    height: 25vh;
+    max-height: fit-content;
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.1vw;
+    font-family: 'Press Start 2P', cursive;
+    text-shadow: 0 0 1px rgb(28, 37, 136);
+    border: 5px ridge rgb(2, 7, 29);
+    box-shadow: 0 0 6px 7px rgb(32, 27, 59) inset;
+    border-radius: 20px;
+    transition: 0.6s;
+    background-image: linear-gradient(to bottom right,
+      rgb(36, 105, 145),
+      rgb(189, 204, 218),
+      rgb(36, 105, 145),
+      rgb(189, 204, 218));
+}
+
+#host {
+    z-index: 5;
+    position: absolute;
+    bottom: 2%;
+    right: 17%;
+    height: 65%;
+}
+
+/****************** KEYBOARD ******************/
+
+#bottomCont {
+    position: relative;
+    margin-left: 11%;
+    bottom: 6%;
+    height:30%;
+    width: 80%;
+    transition: 0.8s;
+}
+
+.keyRow {
+    width: 100%;
+    height: 33%;
+} 
+
+.myBtn, .deadBtn {
+    width: 8%;
+    height: 100%;
+    border: 0.55px inset gainsboro;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 15%;
+    background: url("images/btn-bg.png");
+    background-size: cover;
+    font-family: 'Russo One', sans-serif;
+}
+
+.disabledbutton {
+    pointer-events: none;
+}
+
+.myBtn:hover {
+    cursor: pointer;
+    background: dimgray;
+}
+
+.keyBtn {
+    margin-top: 25%;
+    display: inline-block;
+    line-height: 100%;
+    font-size: 45px;
+    color: rgb(30, 30, 40);
+    text-shadow: 0 0 7.5px rgb(80, 80, 80);
+}
+
+
+/****************** VICTORY ******************/
+
+#winModal {
+    display: none;
+    position: fixed;
+    top: 25%;
+    left: 37.5%;
+    width: 25%;
+    height: 40%;
+    text-align: center;
+    z-index: 5;
+    background: url("images/youwin2.gif");
+    background-size: cover;
+    border-radius: 20%;
+    font-size: 27px;
+    color: black;
+    text-shadow: 0 0 5px gold;
+    font-family: 'Frijole', cursive;
+    box-shadow: 0 0 20px 10px thistle inset;
+}
+
+#play {
+    display: inline-block;
+    position: absolute;
+    bottom: 5%;
+    left: 31%;
+    font-size: 33px;
+    border: 3px inset navajowhite;
+    color: navajowhite;
+    font-family: 'VT323', monospace;
+}
+
+
+
+@media (max-width: 1400px) {
+    #host {
+        height: 60%;
+    }
+    #infoBox {
+        width: 19%;
+        height: 37%;
+    }
+    #message {
+        height: 55%;
+        width: 85%;
+        font-size: 1vw;
+    }
+    .infoLine, #score, #spinDiv, #category {    
+        margin: 3% 0;
+    }
+    .keyBtn {
+        font-size: 35px;
+    }
+}
+
+@media (max-width: 1200px) {
+    #wheelImg {
+        width: 50%;
+        height: auto; 
+    }
+    #arwImg {
+        top: -3%;
+        left: 47%;
+        width: 6.25%;
+    }
+    #wheelCont {
+        left: 20%;
+        top: 20%;
+    }  
+    #spinBtn {
+        top: 39.78%;
+        left: 45.5%;
+        width: 9%;
+        height: 19%;
+        font-size: 1.2vw;
+    }
+    #message {
+        height: 42%;
+        font-size: 0.9vw;
+    }
+    #infoBox {
+        width: 16%;
+        height: 37%;
+    }
+    .infoLine, #score, #spinDiv, #category {    
+        font-size: 18px;
+    }
+    .myBtn, .deadBtn {
+        width: 7%;
+        height: 90%;
+    }
+    .keyBtn {
+        height: 90%;
+        margin-top: 20%;
+        line-height: 160%;
+        font-size: 2.2vw;
+    }
+    #boardCont {
+        height: 70%;
+        width: 82%;
+        /* margin-top: 0.6%; */
+    }
+    .myRow {
+        height: 12%;
+    }  
+    .cell {
+        width: 8%;
+        /* height: 80%; */
+    }
+    .letter {
+        font-size: 4vw;
+    } 
+}
+
+@media (max-width: 900px) {
+    #host {
+        height: 50%;
+    }
+    #wheelImg {
+        width: 60%;
+    }
+    #arwImg {
+        top: 0;
+        left: 47%;
+        width: 6.25%;
+    }
+    #wheelCont {
+        left: 10%;
+        top: 20%;
+    }  
+    #spinBtn {
+        top: 41%;
+        left: 44.5%;
+        width: 11%;
+        height: 19%;
+        font-size: 2vw;
+    }
+    #message {
+        height: 33%;
+        font-size: 0.8vw;
+    }
+    .infoLine, #score, #spinDiv, #category {    
+        font-size: 15px;
+    }
+    #bottomCont {
+        margin-left: 15%;
+        bottom: 6%;
+        height: 20%;
+        width: 70%;
+    }
+    .keyRow {
+        width: 100%;
+        height: 30%;
+    } 
+    .myBtn, .deadBtn {
+        width: 7%;
+        height: 85%;
+    }
+    .keyBtn {
+        margin-top: 20%;
+        line-height: 140%;
+        font-size: 19px;
+        text-align: left;
+    }
+    #boardCont {
+        height: 70%;
+        width: 84%;
+        margin-left: 2%;
+        margin-top: 0.6%;
+    }
+    .myRow {
+        height: 15%;
+    } 
+    .cell {
+        width: 8%;
+        height: 80%;
+    }
+    .letter {
+        margin-top: 15%;
+        font-size: 4vw;
+    }
+
+    #winModal {
+        font-size: 17px;
+    }
+    #play {
+        font-size: 25px;
+    }
+}
+
+@media (max-width: 650px) {
+    #host {
+        display: none;
+    }
+    #wheelImg {
+        width: 55%;
+    }
+    #arwImg {
+        top: -3%;
+        left: 47%;
+        width: 6.25%;
+    }
+    #wheelCont {
+        /*left: 12%;*/
+        top: 20%;
+    }  
+    #spinBtn {
+        top: 39.78%;
+        left: 44%;
+        width: 12%;
+        height: 21%;
+        font-size: 12px;
+        box-shadow: none;
+        border: none;
+    }
+    #infoBox {
+        display: none;
+    }
+    #bottomCont {
+        margin-left: 15%;
+        bottom: 6%;
+        height: 25%;
+        width: 100%;
+    }
+    .keyRow {
+        width: 100%;
+        height: 30%;
+    } 
+    .myBtn, .deadBtn {
+        width: 7%;
+        height: 75%;
+    }
+    .keyBtn {
+        margin-top: 20%;
+        line-height: 200%;
+        margin-right: 5px;
+        font-size: 16px;
+    }
+    #boardCont {
+        height: 70%;
+        width: 96%;
+        margin-left: 2%;
+        margin-right: 2%;
+        margin-top: 0.6%;
+    }
+    .myRow {
+        height: 15%;
+    } 
+    .cell {
+        width: 8%;
+        height: 60%;
+    }
+    .letter {
+        line-height: 140%;
+        font-size: 27.5px;
+    }
+
+    #winModal {
+        font-size: 12px;
+    }
+    #play {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 400px) {
+    .keyBtn {
+        line-height: 200%;
+        font-size: 13px;
+    }
+    #spinBtn {
+        top: 39.78%;
+        left: 44%;
+        width: 12%;
+        height: 21%;
+        font-size: 0;
+    }
+    .letter {
+        line-height: 180%;
+        font-size: 13px;
+    }
+    #boardCont {
+        height: 70%;
+        width: 96%;
+        margin-left: 2%;
+        margin-right: 2%;
+        margin-top: 0.6%;
+    }
+    #bottomCont {
+        margin-left: 5%;
+        bottom: 6%;
+        height: 25%;
+        width: 100%;
+    }
+    #winModal {
+        font-size: 10px;
+    }
+    #play {
+        font-size: 12px;
+    }
+}
