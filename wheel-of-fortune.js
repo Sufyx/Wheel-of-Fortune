@@ -60,9 +60,9 @@ var word9 = {
 }
 
 var word10 = {
-    word: "Purple",
+    word: "PURPLE",
     category: "Colors",
-    cells: ["r2c4", "r2c5", "r2c6", "r2c7", "r2c8", "r2c10", "r4c4", "r4c5", "r4c6", "r4c7"],
+    cells: ["r3c4", "r3c5", "r3c6", "r3c7", "r3c8", "r3c9"],
 }
 
 // under construction
