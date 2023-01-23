@@ -59,6 +59,38 @@ var word9 = {
     cells: ["r2c4", "r2c5", "r2c6", "r2c7", "r2c8", "r2c10", "r4c4", "r4c5", "r4c6", "r4c7"],
 }
 
+// under construction
+// get a word and assemble fitting cells array
+function fitWord(word) {
+    const rowsLimit = 5;
+    const columnsLimit = 12;
+    const words = word.split(" ");
+    const cells = [];
+    let rows = 2;
+    let currentCell = 1;
+    words.forEach(word => {
+        if (word.length > columnsLimit) {
+            console.error("Word too long");
+            return -1;
+        }
+        if (currentCell + word.length + 1 <= columnsLimit) {
+            currentCell += word.length + 1;
+        } else { 
+            rows++;
+            currentCell = word.length + 1;
+            if (rows > rowsLimit) {
+                console.error("Word too long");
+                return -1;
+            }
+        }
+        for (let i = 0; i < word.length; i++) {
+            cells.push(`r${rows}c${currentCell-word.length+i}`);
+        }
+    });
+    console.log("fitWord ", cells);
+    return cells;
+}
+
 
 
 var words = [word1, word2, word3, word4, word5, word6, word7, word8, word9]; //array of possible words
@@ -75,13 +107,15 @@ function setBoard() {
     score = 0;
     wordex = getRandom(words.length) - 1;
     console.log("word is " + words[wordex].word);
+    // const ncells = [...fitWord(words[wordex].word)];
 
     for (var i = 0; i < words[wordex].word.length; i++) {
         if (words[wordex].word[i] == " ") {
             found++;
             continue;
         }
-
+        // console.log(`words[wordex].cells[i]=${words[wordex].cells[i]} | ncells[i]=${ncells[i]}`);
+        // var c = '#' + ncells[i];
         var c = '#' + words[wordex].cells[i];
         var str = '<span class="letter">' + words[wordex].word[i] + '</span>';
         $(c)[0].innerHTML = str;
