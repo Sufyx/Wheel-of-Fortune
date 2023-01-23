@@ -59,6 +59,12 @@ var word9 = {
     cells: ["r2c4", "r2c5", "r2c6", "r2c7", "r2c8", "r2c10", "r4c4", "r4c5", "r4c6", "r4c7"],
 }
 
+var word10 = {
+    word: "Purple",
+    category: "Colors",
+    cells: ["r2c4", "r2c5", "r2c6", "r2c7", "r2c8", "r2c10", "r4c4", "r4c5", "r4c6", "r4c7"],
+}
+
 // under construction
 // get a word and assemble fitting cells array
 function fitWord(word) {
@@ -93,7 +99,7 @@ function fitWord(word) {
 
 
 
-var words = [word1, word2, word3, word4, word5, word6, word7, word8, word9]; //array of possible words
+var words = [word1, word2, word3, word4, word5, word6, word7, word8, word9, word10];
 var score; // current user score
 var wordex; // index for current word
 var found; // letters found in word so far 
