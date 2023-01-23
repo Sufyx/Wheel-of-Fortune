@@ -6,55 +6,55 @@
 
 /* Word Objects */
 var word1 = {
-    word: "APPLE", 
-    category: "Fruit", 
+    word: "APPLE",
+    category: "Fruit",
     cells: ["r3c4", "r3c5", "r3c6", "r3c7", "r3c8"],
 }
 
 var word2 = {
-    word: "WATERMELON", 
+    word: "WATERMELON",
     category: "Fruit",
     cells: ["r3c2", "r3c3", "r3c4", "r3c5", "r3c6", "r3c7", "r3c8", "r3c9", "r3c10", "r3c11"],
 }
 
 var word3 = {
-    word: "GIRAFFE", 
+    word: "GIRAFFE",
     category: "Animal",
     cells: ["r3c3", "r3c4", "r3c5", "r3c6", "r3c7", "r3c8", "r3c9"],
 }
 
 var word4 = {
-    word: "MONKEY", 
+    word: "MONKEY",
     category: "Animal",
     cells: ["r3c4", "r3c5", "r3c6", "r3c7", "r3c8", "r3c9"],
 }
 
 var word5 = {
-    word: "FINLAND", 
+    word: "FINLAND",
     category: "Countries",
     cells: ["r3c3", "r3c4", "r3c5", "r3c6", "r3c7", "r3c8", "r3c9"],
 }
 
 var word6 = {
-    word: "NEW ZEALAND", 
+    word: "NEW ZEALAND",
     category: "Countries",
     cells: ["r2c2", "r2c3", "r2c4", "r2c6", "r4c2", "r4c3", "r4c4", "r4c5", "r4c6", "r4c7", "r4c8"],
 }
 
 var word7 = {
-    word: "BRAZIL", 
+    word: "BRAZIL",
     category: "Countries",
     cells: ["r3c4", "r3c5", "r3c6", "r3c7", "r3c8", "r3c9"],
 }
 
 var word8 = {
-    word: "COCONUT", 
+    word: "COCONUT",
     category: "Fruit",
     cells: ["r3c3", "r3c4", "r3c5", "r3c6", "r3c7", "r3c8", "r3c9"],
 }
 
 var word9 = {
-    word: "POLAR BEAR", 
+    word: "POLAR BEAR",
     category: "Animal",
     cells: ["r2c4", "r2c5", "r2c6", "r2c7", "r2c8", "r2c10", "r4c4", "r4c5", "r4c6", "r4c7"],
 }
@@ -69,23 +69,21 @@ var slice; // point value of that was rolled a wheel spin
 
 
 
-/**
- * Initialize board with new word
- */
+/** Initialize board with new word **/
 function setBoard() {
     found = 0;
     score = 0;
     wordex = getRandom(words.length) - 1;
-    console.log("word is " + words[wordex].word); //dev cheats
+    console.log("word is " + words[wordex].word);
 
     for (var i = 0; i < words[wordex].word.length; i++) {
-        if (words[wordex].word[i] == " ") { 
+        if (words[wordex].word[i] == " ") {
             found++;
             continue;
         }
 
-        var c = '#' + words[wordex].cells[i]; 
-        var str = '<span class="letter">' + words[wordex].word[i] + '</span>'; 
+        var c = '#' + words[wordex].cells[i];
+        var str = '<span class="letter">' + words[wordex].word[i] + '</span>';
         $(c)[0].innerHTML = str;
         $(c).css({
             "background": 'url("images/tile.png")',
@@ -97,9 +95,8 @@ function setBoard() {
     }
 }
 
-/**
- * "Spin wheel" click handler
- */
+
+/** "Spin wheel" click handler **/
 $("#spinBtn").click(function () {
 
     $("#spinBtn").fadeOut(1000);
@@ -129,27 +126,28 @@ $("#spinBtn").click(function () {
     }, 5000);
 })
 
-/**
- * Virtual keyboard click handler
- */
+
+/** Virtual keyboard click handler **/
 $(".myBtn").click(function () {
-    if (this.dataUsed) { 
+    if (this.dataUsed) {
         return;
     }
 
     this.dataUsed = true;
     $(".myBtn").addClass("disabledbutton");
     this.style.background = "darkslategray";
-    var c = this.innerText; 
+    var c = this.innerText;
     var n = checkLetter(words[wordex], c);
     found += n;
 
     if (n == 0) {
         score -= slice / 2;
-        $("#message")[0].innerHTML = "<br/><br/>Found no '" + c + "'s.<br/><br> Lost<br/>" + (slice / 2) + "!";
+        $("#message")[0].innerHTML =
+            "<br/><br/>Found no '" + c + "'s.<br/><br> Lost<br/>" + (slice / 2) + "!";
     } else {
         score += n * slice;
-        $("#message")[0].innerHTML = "<br/><br/>Found " + n + " '" + c + "'s.<br><br/> Scored<br/>" + (n * slice) + "!";
+        $("#message")[0].innerHTML =
+            "<br/><br/>Found " + n + " '" + c + "'s.<br><br/> Scored<br/>" + (n * slice) + "!";
     }
 
     $("#message")[0].style.background =
@@ -175,9 +173,7 @@ $(".myBtn").click(function () {
 })
 
 
-/**
- * Transition form wheel spin to letter choice mode.
- */
+/** Transition form wheel spin to letter choice mode **/
 function boardUp() {
     $("#wheelCont").fadeOut(1000);
     $(".myBtn").fadeIn(1100);
@@ -196,37 +192,34 @@ function boardUp() {
     $("#message")[0].innerHTML = "<br/><br/>Choose </br/>a letter.";
 }
 
-/**
- * Check if a letter is in a word
- */
-function checkLetter (thisWord, letter) { 
+
+/** Check if a letter is in a word **/
+function checkLetter(thisWord, letter) {
     var c = thisWord.word.indexOf(letter);
     var n = 0;
-    while (c != -1) { 
-        reveal(thisWord.cells[c]); 
+    while (c != -1) {
+        reveal(thisWord.cells[c]);
         c = thisWord.word.indexOf(letter, (c + 1));
         n++;
     }
     return n;
 }
 
-/**
- * Reveal a letter tile
- */
+
+/** Reveal a letter tile **/
 function reveal(cell) {
-    var str = '#' + cell + ' .letter'; 
-    $(str)[0].style.color = 'black'; 
-    str = '#' + cell; 
-    $(str).css({ 
+    var str = '#' + cell + ' .letter';
+    $(str)[0].style.color = 'black';
+    str = '#' + cell;
+    $(str).css({
         "background": 'lemonchiffon',
         "transition": '1s',
         "transform": 'rotateY(360deg)'
     });
 }
 
-/**
- * Transition form letter choice to wheel spin mode.
- */
+
+/** Transition form letter choice to wheel spin mode **/
 function wheelUp() {
     $("#boardCont")[0].style.opacity = 0.3;
     $("#bottomCont")[0].style.opacity = 0.3;
@@ -243,9 +236,8 @@ function wheelUp() {
     $("#message")[0].innerHTML = "<br/>Click the<br/>'Spin' button<br/>to spin the wheel."
 }
 
-/**
- * Game successfully finished
- */
+
+/** Game successfully finished **/
 function win() {
 
     $("#message")[0].style.backgroundImage =
@@ -263,9 +255,8 @@ function win() {
 
 }
 
-/**
- * Victory special effects
- */
+
+/** Victory special effects **/
 function boardWin() {
     var r, g, b, clr, shad, brdr, r, c, now;
     for (var i = 0; i <= 1000; i++) {
@@ -274,21 +265,21 @@ function boardWin() {
             g = getRandom(256) - 1;
             b = getRandom(256) - 1;
             clr = "rgb(" + r + "," + g + "," + b + ")";
-            
+
             r = getRandom(256) - 1;
             g = getRandom(256) - 1;
             b = getRandom(256) - 1;
             shad = "0px 0px 15px 5.5px rgb(" + r + "," + g + "," + b + ") inset";
-            
+
             r = getRandom(256) - 1;
             g = getRandom(256) - 1;
             b = getRandom(256) - 1;
             brdr = "3px groove rgb(" + r + "," + g + "," + b + ")";
-            
+
             r = getRandom(5);
             c = getRandom(12);
             now = "r" + r + "c" + c;
-            
+
             if (words[wordex].cells.indexOf(now) == -1) {
                 now = "#" + now;
                 $(now)[0].style.background = clr;
@@ -299,13 +290,13 @@ function boardWin() {
     }
 }
 
-/** Start a new game */
+/** Start a new game **/
 $("#play").click(function () {
     location.reload();
 })
 
 function getRandom(max) {
-    var r = Math.random() * max + 1; 
+    var r = Math.random() * max + 1;
     r = Math.floor(r);
     return r;
 }
